@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -359,7 +358,7 @@
       border-radius: 30px;
     }
 
-    /* Custom mobile player */
+    /* Custom mobile player - now uses native audio */
     .custom-player {
       width: 100%;
       margin-bottom: 1.5rem;
@@ -371,104 +370,18 @@
       background: #1a1d24;
     }
 
-    .player-controls {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .play-pause-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid #25657a;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
-    body.dark .play-pause-btn {
-      background: #2a2f3a;
-      border-color: #25657a;
-    }
-    .play-pause-btn:hover {
-      background: #f0f2f5;
-      transform: scale(1.05);
-    }
-    body.dark .play-pause-btn:hover {
-      background: #333946;
-    }
-    .play-pause-btn:active {
-      transform: scale(0.95);
-    }
-
-    .play-icon, .pause-icon {
-      width: 0;
-      height: 0;
-      border-style: solid;
-    }
-    .play-icon {
-      border-width: 8px 0 8px 14px;
-      border-color: transparent transparent transparent #25657a;
-      margin-left: 3px;
-    }
-    .pause-icon {
-      width: 14px;
-      height: 16px;
-      border: none;
-      background: linear-gradient(to right, #25657a 0%, #25657a 35%, transparent 35%, transparent 65%, #25657a 65%, #25657a 100%);
-      display: none;
-    }
-
-    .time-display {
-      font-size: 0.85rem;
-      color: #5f6b7f;
-      font-variant-numeric: tabular-nums;
-      min-width: 90px;
-      text-align: right;
-    }
-    body.dark .time-display {
-      color: #9aa1b0;
-    }
-
-    .progress-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .progress-bar {
+    .custom-player audio {
       width: 100%;
-      height: 6px;
-      background: #e6eaf0;
-      border-radius: 3px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
+      height: 54px;
+      border-radius: 12px;
+      outline: none;
     }
-    body.dark .progress-bar {
+
+    .custom-player audio::-webkit-media-controls-panel {
+      background: #fff;
+    }
+    body.dark .custom-player audio::-webkit-media-controls-panel {
       background: #2a2f3a;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #25657a, #6240a0);
-      border-radius: 3px;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    .loading-message {
-      font-size: 0.85rem;
-      color: #5f6b7f;
-      font-style: italic;
-    }
-    body.dark .loading-message {
-      color: #9aa1b0;
     }
     
     /* Simple download link - always visible */
@@ -819,7 +732,7 @@
         .map(para => `<p>${escapeHtml(para)}</p>`)
         .join('');
       
-      // Build audio section - simple and working
+      // Build audio section with working players for hosted environment
       let audioHtml = '';
       
       if (art.audioId) {
@@ -838,22 +751,16 @@
               </iframe>
             </div>
             
-            <!-- Mobile: Direct download link (works everywhere) -->
+            <!-- Mobile: Native HTML5 Audio Player -->
             <div class="custom-player">
-              <div style="text-align: center; padding: 1.5rem;">
-                <p style="margin-bottom: 1rem; color: #5f6b7f;">
-                  Tap the button below to download and listen to this article
-                </p>
-                <a href="${escapeHtml(art.audioDownloadUrl)}" 
-                   class="download-link" 
-                   download
-                   style="display: inline-block; font-size: 1rem; padding: 0.8rem 1.6rem;">
-                  ⬇️ Download Audio
-                </a>
-              </div>
+              <audio controls preload="metadata" style="width: 100%; border-radius: 12px;">
+                <source src="${escapeHtml(art.audioDownloadUrl)}" type="audio/wav">
+                <source src="${escapeHtml(art.audioDownloadUrl)}" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
             </div>
             
-            <!-- Always visible download option -->
+            <!-- Download link - always visible as backup -->
             <a href="${escapeHtml(art.audioDownloadUrl)}" 
                class="download-link" 
                download
