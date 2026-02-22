@@ -1,16 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>The Mundez Energy Blog</title>
-  <style>
-    /* ---------- MODERN RESET & GLOBAL ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+  <!-- ============================================================
+       SEO — BASE META (dynamically updated per article via JS)
+       ============================================================ -->
+  <title id="pageTitle">The Mundez Energy Blog — Energy, Insight &amp; Inspiration</title>
+  <meta name="description"        id="metaDesc"    content="The Mundez Energy Blog — fresh perspectives on energy, mindset, and living with intention. Read, listen, and share.">
+  <meta name="keywords"                            content="Mundez Energy, blog, energy, mindset, inspiration, audio articles, Mundez">
+  <meta name="author"             id="metaAuthor"  content="The Mundez Energy Blog">
+  <meta name="robots"                              content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical"           id="canonical"   href="https://cryptonian0xx.github.io/TheMundezEnergyBlog/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        id="ogType"      content="website">
+  <meta property="og:site_name"                    content="The Mundez Energy Blog">
+  <meta property="og:url"         id="ogUrl"       content="https://cryptonian0xx.github.io/TheMundezEnergyBlog/">
+  <meta property="og:title"       id="ogTitle"     content="The Mundez Energy Blog">
+  <meta property="og:description" id="ogDesc"      content="Fresh perspectives on energy, mindset, and living with intention.">
+  <meta property="og:image"       id="ogImage"     content="https://cryptonian0xx.github.io/TheMundezEnergyBlog/og-cover.png">
+  <meta property="og:image:width"                  content="1200">
+  <meta property="og:image:height"                 content="630">
+  <meta property="og:locale"                       content="en_US">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card"                        content="summary_large_image">
+  <meta name="twitter:site"                        content="@demundez">
+  <meta name="twitter:creator"                     content="@demundez">
+  <meta name="twitter:title"      id="twTitle"     content="The Mundez Energy Blog">
+  <meta name="twitter:description" id="twDesc"     content="Fresh perspectives on energy, mindset, and living with intention.">
+  <meta name="twitter:image"      id="twImage"     content="https://cryptonian0xx.github.io/TheMundezEnergyBlog/og-cover.png">
+
+  <!-- JSON-LD Structured Data — updated per article via JS -->
+  <script type="application/ld+json" id="jsonLd">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "The Mundez Energy Blog",
+    "description": "Fresh perspectives on energy, mindset, and living with intention.",
+    "url": "https://cryptonian0xx.github.io/TheMundezEnergyBlog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "The Mundez Energy Blog",
+      "url": "https://cryptonian0xx.github.io/TheMundezEnergyBlog/"
     }
+  }
+  </script>
+
+  <!-- Preconnects for performance -->
+  <link rel="preconnect" href="https://drive.google.com">
+  <link rel="preconnect" href="https://opensheet.elk.sh">
+
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: clamp(0.9rem, 0.7rem + 0.8vw, 1.1rem); }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -25,63 +71,31 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* dark mode - softer */
-    body.dark {
-      background: #111318;
-      color: #e2e4e9;
-    }
+    /* ---------- DARK MODE ---------- */
+    body.dark { background: #111318; color: #e2e4e9; }
     body.dark .card,
-    body.dark .article-view {
-      background: #1c1f26;
-      color: #e6e8ed;
-      box-shadow: 0 8px 20px -6px rgba(0,0,0,0.5);
-    }
-    body.dark .back-btn {
-      background: #2a2f3a;
-      color: #e2e4e9;
-      border: 1px solid #3a3f4b;
-    }
+    body.dark .article-view { background: #1c1f26; color: #e6e8ed; box-shadow: 0 8px 20px -6px rgba(0,0,0,0.5); }
+    body.dark .back-btn { background: #2a2f3a; color: #e2e4e9; border-color: #3a3f4b; }
     body.dark .meta-info,
-    body.dark .article-meta {
-      color: #9aa1b0;
-    }
-    body.dark .audio-section {
-      border-top-color: #2a2f3a;
-      border-bottom-color: #2a2f3a;
-    }
-    body.dark .drive-preview {
-      background: #1a1d24;
-    }
-    body.dark .simple-audio {
-      background: #1a1d24;
-    }
-    body.dark .download-link {
-      background: #2a2f3a;
-      color: #e2e4e9;
-      border-color: #3a3f4b;
-    }
-    body.dark .download-link:hover {
-      background: #333946;
-    }
-    body.dark audio {
-      background: #2a2f3a;
-      color: #e2e4e9;
-    }
+    body.dark .article-meta { color: #9aa1b0; }
+    body.dark .audio-section { border-color: #2a2f3a; }
+    body.dark .drive-preview { background: #1a1d24; }
+    body.dark .simple-audio { background: #1a1d24; }
+    body.dark .download-link { background: #2a2f3a; color: #e2e4e9; border-color: #3a3f4b; }
+    body.dark .download-link:hover { background: #333946; }
+    body.dark audio { background: #2a2f3a; }
+    body.dark .share-section { border-color: #2a2f3a; }
+    body.dark .share-label { color: #9aa1b0; }
+    body.dark .share-btn.copy-link { background: #2a2f3a; color: #e2e4e9; border-color: #3a3f4b; }
+    body.dark .share-btn.copy-link:hover { background: #333946; }
+    body.dark .card-share-btn { color: #9aa1b0; }
+    body.dark .card-share-btn:hover { background: #2a2f3a; }
+    body.dark .preview { color: #b5bccc; }
 
-    /* fluid typography - more refined scale */
-    html {
-      font-size: clamp(0.9rem, 0.7rem + 0.8vw, 1.1rem);
-    }
+    /* ---------- LAYOUT ---------- */
+    .app { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%; flex: 1; }
 
-    .app {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      width: 100%;
-      flex: 1;
-    }
-
-    /* header - cleaner */
+    /* ---------- HEADER ---------- */
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -98,12 +112,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .header-controls {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .header-controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+
     #searchInput {
       padding: 0.5rem 1.2rem;
       border-radius: 40px;
@@ -114,13 +124,9 @@
       transition: 0.2s;
       font-weight: 400;
     }
-    body.dark #searchInput {
-      background: #1c1f26;
-      border-color: #333946;
-      color: #e2e4e9;
-    }
+    body.dark #searchInput { background: #1c1f26; border-color: #333946; color: #e2e4e9; }
+
     .dark-toggle {
-      background: none;
       border: 1px solid #d0d5dd;
       border-radius: 40px;
       padding: 0.5rem 1.2rem;
@@ -130,25 +136,16 @@
       transition: 0.2s;
       font-weight: 400;
     }
-    body.dark .dark-toggle {
-      background: #1c1f26;
-      border-color: #333946;
-      color: #e2e4e9;
-    }
-    .dark-toggle:hover {
-      background: #eef1f5;
-    }
-    body.dark .dark-toggle:hover {
-      background: #2a2f3a;
-    }
+    body.dark .dark-toggle { background: #1c1f26; border-color: #333946; color: #e2e4e9; }
+    .dark-toggle:hover { background: #eef1f5; }
+    body.dark .dark-toggle:hover { background: #2a2f3a; }
 
-    /* Loading spinner - smaller */
+    /* ---------- SPINNER ---------- */
     .spinner {
       display: inline-block;
-      width: 2.2rem;
-      height: 2.2rem;
+      width: 2.2rem; height: 2.2rem;
       border: 3px solid #d0d5dd;
-      border-top: 3px solid #25657a;
+      border-top-color: #25657a;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
       margin: 2rem auto;
@@ -164,25 +161,12 @@
       margin: 2rem 0;
       color: #3f4656;
     }
-    body.dark .empty-state { 
-      background: #1c1f26;
-      color: #9aa1b0;
-    }
+    body.dark .empty-state { background: #1c1f26; color: #9aa1b0; }
 
-    /* ---------- HOMEPAGE GRID (cards) - softer ---------- */
-    .feed-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    @media (min-width: 640px) {
-      .feed-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .feed-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+    /* ---------- FEED GRID ---------- */
+    .feed-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+    @media (min-width: 640px)  { .feed-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .feed-grid { grid-template-columns: repeat(3, 1fr); } }
 
     .card {
       background: white;
@@ -195,25 +179,28 @@
       cursor: pointer;
       border: 1px solid rgba(0,0,0,0.02);
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 28px -12px rgba(37,101,122,0.15);
-    }
-    .card h3 {
-      font-size: 1.3rem;
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-      line-height: 1.4;
-    }
-    .meta-info {
-      font-size: 0.8rem;
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 28px -12px rgba(37,101,122,0.15); }
+
+    .card-header { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem; }
+    .card h3 { font-size: 1.3rem; font-weight: 500; line-height: 1.4; flex: 1; }
+
+    /* Tiny share button on card */
+    .card-share-btn {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
       color: #5f6b7f;
-      margin-bottom: 0.75rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      font-weight: 400;
+      transition: background 0.15s;
+      margin-top: -1px;
     }
+    .card-share-btn:hover { background: #eef1f5; }
+
+    .meta-info { font-size: 0.8rem; color: #5f6b7f; margin-bottom: 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap; }
     .preview {
       color: #2d3543;
       margin: 0.5rem 0 1rem;
@@ -224,23 +211,18 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       line-height: 1.5;
-      font-weight: 400;
     }
-    body.dark .preview { color: #b5bccc; }
     .read-more {
-      background: none;
-      border: none;
-      color: #25657a;
-      font-weight: 450;
+      background: none; border: none;
+      color: #25657a; font-weight: 450;
       align-self: flex-start;
       padding: 0.2rem 0;
       border-bottom: 1px solid transparent;
-      transition: 0.15s;
-      font-size: 0.9rem;
+      transition: 0.15s; font-size: 0.9rem;
     }
     .card:hover .read-more { border-bottom-color: #25657a; }
 
-    /* ---------- ARTICLE VIEW - refined ---------- */
+    /* ---------- ARTICLE VIEW ---------- */
     .article-view {
       background: white;
       border-radius: 28px;
@@ -251,78 +233,46 @@
     }
     .back-btn {
       background: #f0f2f5;
-      border: none;
+      border: 1px solid transparent;
       padding: 0.5rem 1.4rem;
       border-radius: 40px;
       font-size: 0.9rem;
       font-weight: 450;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-      margin-bottom: 1.8rem;
-      transition: 0.15s;
-      border: 1px solid transparent;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      cursor: pointer; margin-bottom: 1.8rem; transition: 0.15s;
     }
-    .back-btn:hover { 
-      background: #e5e9f0;
-    }
+    .back-btn:hover { background: #e5e9f0; }
+
     .article-title {
       font-size: clamp(1.8rem, 5vw, 2.4rem);
-      font-weight: 500;
-      line-height: 1.3;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
+      font-weight: 500; line-height: 1.3;
+      margin-bottom: 0.75rem; letter-spacing: -0.01em;
     }
     .article-meta {
-      color: #5f6b7f;
-      margin-bottom: 2rem;
-      font-size: 0.9rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e6eaf0;
-      font-weight: 400;
+      color: #5f6b7f; margin-bottom: 2rem; font-size: 0.9rem;
+      padding-bottom: 1rem; border-bottom: 1px solid #e6eaf0;
     }
-    body.dark .article-meta {
-      border-bottom-color: #2a2f3a;
-    }
-    
-    /* Article content - elegant reading */
-    .article-content {
-      font-size: 1rem;
-      margin: 1.5rem 0 1.5rem;
-      line-height: 1.7;
-      font-weight: 400;
-      color: #1e2632;
-    }
-    body.dark .article-content {
-      color: #d6dbe5;
-    }
-    .article-content p {
-      margin-bottom: 1.3rem;
-    }
-    
-    /* ---------- AUDIO SECTION - BETWEEN META AND CONTENT ---------- */
+    body.dark .article-meta { border-bottom-color: #2a2f3a; }
+
+    .article-content { font-size: 1rem; margin: 1.5rem 0; line-height: 1.7; color: #1e2632; }
+    body.dark .article-content { color: #d6dbe5; }
+    .article-content p { margin-bottom: 1.3rem; }
+
+    /* ---------- AUDIO SECTION ---------- */
     .audio-section {
       margin: 1.5rem 0 2rem;
       padding: 1.5rem 0;
       border-top: 1px solid #e6eaf0;
       border-bottom: 1px solid #e6eaf0;
     }
-    
     .audio-label {
-      font-weight: 450;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #25657a;
-      font-size: 0.95rem;
-      letter-spacing: -0.01em;
+      font-weight: 450; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 8px;
+      color: #25657a; font-size: 0.95rem;
     }
-    
-    /* Google Drive Preview Container - desktop only */
+
+    /* ── Google Drive iframe — desktop (≥769px) only ── */
     .drive-preview {
-      position: relative;
       width: 100%;
       background: #f2f5f9;
       border-radius: 20px;
@@ -330,18 +280,15 @@
       box-shadow: 0 4px 12px -6px rgba(0,0,0,0.1);
       margin-bottom: 1.5rem;
     }
-    body.dark .drive-preview {
-      background: #1a1d24;
-    }
-    
+    body.dark .drive-preview { background: #1a1d24; }
     .drive-preview iframe {
       width: 100%;
       height: 100px;
       border: none;
       display: block;
     }
-    
-    /* Simple audio player - mobile only */
+
+    /* ── Native audio — mobile (≤768px) only ── */
     .simple-audio {
       width: 100%;
       margin-bottom: 1.5rem;
@@ -349,107 +296,201 @@
       border-radius: 20px;
       padding: 1rem;
     }
-    body.dark .simple-audio {
-      background: #1a1d24;
-    }
-    
-    .simple-audio audio {
-      width: 100%;
-      border-radius: 30px;
-    }
+    body.dark .simple-audio { background: #1a1d24; }
+    .simple-audio audio { width: 100%; border-radius: 30px; display: block; }
 
-    /* Custom mobile player - now uses native audio */
-    .custom-player {
-      width: 100%;
-      margin-bottom: 1.5rem;
-      background: #f2f5f9;
-      border-radius: 20px;
-      padding: 1rem;
-    }
-    body.dark .custom-player {
-      background: #1a1d24;
-    }
-
-    .custom-player audio {
-      width: 100%;
-      height: 54px;
-      border-radius: 12px;
-      outline: none;
-    }
-
-    .custom-player audio::-webkit-media-controls-panel {
-      background: #fff;
-    }
-    body.dark .custom-player audio::-webkit-media-controls-panel {
-      background: #2a2f3a;
-    }
-    
-    /* Simple download link - always visible */
-    .download-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #f0f2f5;
-      color: #1e2632;
-      text-decoration: none;
-      padding: 0.6rem 1.4rem;
-      border-radius: 40px;
-      font-weight: 450;
-      transition: 0.15s;
-      border: 1px solid #d0d5dd;
-      font-size: 0.9rem;
-    }
-    .download-link:hover {
-      background: #e5e9f0;
-      transform: translateY(-1px);
-    }
-    body.dark .download-link {
-      background: #2a2f3a;
-      color: #e2e4e9;
-      border-color: #3a3f4b;
-    }
-    body.dark .download-link:hover {
-      background: #333946;
-    }
-
-    /* ========== RESPONSIVE AUDIO VISIBILITY ========== */
-    
-    /* Desktop (768px and above) - show drive-preview, hide simple-audio and custom-player */
+    /* Responsive visibility — original 768px split */
     @media (min-width: 769px) {
-      .drive-preview {
-        display: block;
-      }
-      .simple-audio {
-        display: none;
-      }
-      .custom-player {
-        display: none;
-      }
+      .drive-preview    { display: block; }
+      .simple-audio     { display: none;  }
+      .landscape-tip    { display: none;  }
     }
-    
-    /* Mobile (768px and below) - show custom-player, hide drive-preview and simple-audio */
     @media (max-width: 768px) {
-      .drive-preview {
-        display: none;
-      }
-      .simple-audio {
-        display: none;
-      }
-      .custom-player {
-        display: block;
-      }
-      .drive-preview iframe {
-        height: 90px;
+      .drive-preview    { display: none;  }
+      .simple-audio     { display: block; }
+      .landscape-tip    { display: flex; }
+    }
+
+    .landscape-tip {
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+      background: #f0f6f8;
+      border: 1px solid #cde3ea;
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: #2d5a6a;
+      line-height: 1.45;
+    }
+    body.dark .landscape-tip {
+      background: #192028;
+      border-color: #1e3a47;
+      color: #7fbdd0;
+    }
+    .landscape-tip-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .download-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #f0f2f5; color: #1e2632;
+      text-decoration: none; padding: 0.6rem 1.4rem;
+      border-radius: 40px; font-weight: 450;
+      transition: 0.15s; border: 1px solid #d0d5dd; font-size: 0.9rem;
+    }
+    .download-link:hover { background: #e5e9f0; transform: translateY(-1px); }
+    body.dark .download-link { background: #2a2f3a; color: #e2e4e9; border-color: #3a3f4b; }
+    body.dark .download-link:hover { background: #333946; }
+
+    /* ---------- SHARE SECTION ---------- */
+    .share-section {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e6eaf0;
+    }
+    .share-label {
+      font-size: 0.77rem; text-transform: uppercase;
+      letter-spacing: 0.08em; font-weight: 600;
+      color: #5f6b7f; margin-bottom: 0.9rem;
+    }
+    .share-buttons { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.45rem 1rem;
+      border-radius: 40px;
+      font-size: 0.82rem; font-weight: 500;
+      border: none; cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s, filter 0.15s, background 0.15s;
+      white-space: nowrap; line-height: 1;
+      color: white;
+    }
+    .share-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .share-btn:active { transform: translateY(0); }
+
+    .share-btn.native-share { background: linear-gradient(135deg, #25657a, #6240a0); }
+    .share-btn.copy-link    { background: #f0f2f5; color: #1e2632; border: 1px solid #d0d5dd; }
+    .share-btn.copy-link.copied { background: #e6f4ea; color: #2e7d32; border-color: #a5d6a7; }
+    .share-btn.twitter      { background: #000; }
+    .share-btn.facebook     { background: #1877f2; }
+    .share-btn.whatsapp     { background: #25d366; }
+    .share-btn.telegram     { background: #2aabee; }
+    .share-btn.linkedin     { background: #0a66c2; }
+
+    /* ---------- ARTICLE NAVIGATION ---------- */
+    .article-nav {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e6eaf0;
+    }
+    body.dark .article-nav { border-top-color: #2a2f3a; }
+
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 0.85rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #e6eaf0;
+      background: #f9fafb;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      color: inherit;
+      min-width: 0;
+    }
+    body.dark .nav-btn { background: #1a1d24; border-color: #2a2f3a; }
+    .nav-btn:hover {
+      background: white;
+      border-color: #25657a;
+      box-shadow: 0 4px 14px -6px rgba(37,101,122,0.18);
+      transform: translateY(-2px);
+    }
+    body.dark .nav-btn:hover { background: #1c1f26; border-color: #25657a; }
+    .nav-btn.next-btn { text-align: right; }
+
+    .nav-direction {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #25657a;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .next-btn .nav-direction { justify-content: flex-end; }
+
+    .nav-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #1a1e24;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    body.dark .nav-title { color: #e2e4e9; }
+
+    /* On mobile: tighter padding, smaller font, allow up to 4 lines of title */
+    @media (max-width: 600px) {
+      .article-nav { gap: 0.5rem; }
+      .nav-btn { padding: 0.7rem 0.75rem; }
+      .nav-direction { font-size: 0.63rem; }
+      .nav-title {
+        font-size: 0.75rem;
+        -webkit-line-clamp: 4;
+        line-height: 1.3;
       }
     }
 
-    .status-note {
+    /* spacer so next-only aligns right when there's no prev */
+    .nav-spacer { flex: 1; }
+
+    .status-note { text-align: center; color: #6a7285; margin-top: 2rem; font-size: 0.85rem; }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer {
+      margin-top: auto;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid #e6eaf0;
       text-align: center;
-      color: #6a7285;
-      margin-top: 2rem;
-      font-size: 0.85rem;
+    }
+    body.dark .site-footer { border-top-color: #2a2f3a; }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-products {
+      font-size: 0.82rem;
+      color: #5f6b7f;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+    body.dark .footer-products { color: #9aa1b0; }
+
+    .footer-products strong {
+      color: #25657a;
+      font-weight: 600;
+    }
+
+    .footer-copy {
+      font-size: 0.76rem;
+      color: #9aa8bb;
       font-weight: 400;
     }
+    body.dark .footer-copy { color: #6a7285; }
   </style>
 </head>
 <body>
@@ -457,389 +498,627 @@
   <div class="top-bar">
     <h1>⚡ The Mundez Energy Blog</h1>
     <div class="header-controls">
-      <input type="text" id="searchInput" placeholder="search articles..." aria-label="search">
-      <button class="dark-toggle" id="darkToggle" aria-label="toggle dark mode">🌓 dark</button>
+      <input type="text" id="searchInput" placeholder="search articles…" aria-label="Search articles">
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌓 dark</button>
     </div>
   </div>
-
-  <div id="mainContent"></div>
-  <div id="statusMessage" class="status-note"></div>
+  <main id="mainContent" role="main"></main>
+  <div id="statusMessage" class="status-note" aria-live="polite"></div>
 </div>
 
 <script>
-  (function() {
-    // ============================================
-    // CONFIGURATION - PREVIEW FORMAT ONLY
-    // ============================================
-    const CONFIG = {
-      OPENSHEET_URL: 'https://opensheet.elk.sh/1B7Aqsyt9eIDZxXJbtEWGiKzPvc-d2qW6OmvbMYtkQGY/Sheet1',
-      AUDIO_PREVIEW_URL: 'https://drive.google.com/file/d/FILE_ID/preview',
-      AUDIO_DOWNLOAD_URL: 'https://drive.google.com/uc?export=download&id=FILE_ID'
-    };
+(function () {
+  'use strict';
 
-    // Map Google Drive file IDs to GitHub attachment URLs
-    const AUDIO_ID_TO_GITHUB = {
-      '1JeQGvMw65kSaIQZM2Oy91ARZTB7zlqN_': 'https://github.com/user-attachments/files/25351293/wav1.wav',
-      '1X4hYhCKRmELe-gc6qYrNfyZKNBDAXrDW': 'https://github.com/user-attachments/files/25351282/wav2.wav',
-      '1C0SJLSAMAV2KfShyBoD5QjxKzUVeXi1q': 'https://github.com/user-attachments/files/25351266/wav3.wav'
-    };
+  // ============================================================
+  // CONFIG
+  // ============================================================
+  const SITE_URL  = 'https://cryptonian0xx.github.io/TheMundezEnergyBlog';
+  const SITE_NAME = 'The Mundez Energy Blog';
+  const CONFIG = {
+    OPENSHEET_URL:      'https://opensheet.elk.sh/1B7Aqsyt9eIDZxXJbtEWGiKzPvc-d2qW6OmvbMYtkQGY/Sheet1',
+    AUDIO_PREVIEW_URL:  'https://drive.google.com/file/d/FILE_ID/preview',
+    AUDIO_DOWNLOAD_URL: 'https://drive.google.com/uc?export=download&id=FILE_ID'
+  };
 
-    // ============================================
-    // APP STATE
-    // ============================================
-    let articles = [];
-    let filteredArticles = [];
-    let currentView = 'feed';
-    let currentArticle = null;
-    let isLoading = true;
-    let error = null;
-    let searchTerm = '';
+  // ============================================================
+  // STATE
+  // ============================================================
+  let articles         = [];
+  let filteredArticles = [];
+  let currentView      = 'feed';
+  let currentArticle   = null;
+  let isLoading        = true;
+  let error            = null;
+  let searchTerm       = '';
 
-    // DOM elements
-    const mainEl = document.getElementById('mainContent');
-    const statusEl = document.getElementById('statusMessage');
-    const searchInput = document.getElementById('searchInput');
-    const darkToggle = document.getElementById('darkToggle');
+  const mainEl      = document.getElementById('mainContent');
+  const statusEl    = document.getElementById('statusMessage');
+  const searchInput = document.getElementById('searchInput');
+  const darkToggle  = document.getElementById('darkToggle');
 
-    // ============================================
-    // DARK MODE TOGGLE
-    // ============================================
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-    });
+  // ============================================================
+  // DARK MODE  (persists via localStorage)
+  // ============================================================
+  if (localStorage.getItem('meb-theme') === 'dark') document.body.classList.add('dark');
+  darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('meb-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  });
 
-    // ============================================
-    // HELPER: Escape HTML
-    // ============================================
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/[&<>"]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        if (m === '"') return '&quot;';
-        return m;
-      });
+  // ============================================================
+  // HELPERS
+  // ============================================================
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>"]/g, m =>
+      ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[m])
+    );
+  }
+
+  function formatDate(s) {
+    if (!s) return '';
+    try {
+      const p = s.split('/');
+      if (p.length === 3) {
+        return new Date(p[2], p[1]-1, p[0]).toLocaleDateString('en-US',
+          { year:'numeric', month:'short', day:'numeric' });
+      }
+      return s;
+    } catch { return s; }
+  }
+
+  function audioPreviewUrl(id)  { return id ? CONFIG.AUDIO_PREVIEW_URL .replace('FILE_ID', id) : null; }
+  function audioDownloadUrl(id) { return id ? CONFIG.AUDIO_DOWNLOAD_URL.replace('FILE_ID', id) : null; }
+
+  // ============================================================
+  // URL ROUTING  —  per-post deep links (?post=article-N)
+  // ============================================================
+  function canonicalBase() {
+    try {
+      if (location.origin && location.origin !== 'null' && !location.origin.startsWith('file:')) {
+        return location.origin + location.pathname.replace(/\/+$/, '');
+      }
+    } catch(e) {}
+    return SITE_URL;
+  }
+
+  function postUrl(articleId) {
+    return canonicalBase() + (articleId ? `?post=${encodeURIComponent(articleId)}` : '');
+  }
+
+  function postIdFromUrl() {
+    try { return new URLSearchParams(location.search).get('post') || null; }
+    catch(e) { return null; }
+  }
+
+  // ============================================================
+  // SEO  — dynamic <head> updates per page / article
+  // ============================================================
+  function setAttr(id, attr, val) {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute(attr, val || '');
+  }
+
+  function updateSEO(article) {
+    if (article) {
+      const url    = postUrl(article.id);
+      const title  = `${article.title} — ${SITE_NAME}`;
+      const desc   = (article.preview || article.content || '')
+                       .substring(0, 160).replace(/\s+/g,' ').trim();
+      const author = article.author || SITE_NAME;
+
+      document.title = title;
+      setAttr('metaDesc',   'content', desc);
+      setAttr('metaAuthor', 'content', author);
+      setAttr('canonical',  'href',    url);
+      setAttr('ogType',     'content', 'article');
+      setAttr('ogUrl',      'content', url);
+      setAttr('ogTitle',    'content', title);
+      setAttr('ogDesc',     'content', desc);
+      setAttr('twTitle',    'content', title);
+      setAttr('twDesc',     'content', desc);
+
+      // JSON-LD Article
+      const ld = {
+        '@context':          'https://schema.org',
+        '@type':             'Article',
+        'headline':          article.title,
+        'description':       desc,
+        'author':            { '@type':'Person', 'name':author },
+        'publisher':         { '@type':'Organization', 'name':SITE_NAME, 'url':SITE_URL },
+        'url':               url,
+        'mainEntityOfPage':  url
+      };
+      if (article.date) ld.datePublished = article.date;
+      document.getElementById('jsonLd').textContent = JSON.stringify(ld, null, 2);
+
+    } else {
+      // Homepage
+      const url  = canonicalBase();
+      const desc = 'The Mundez Energy Blog — fresh perspectives on energy, mindset, and living with intention. Read, listen, and share.';
+
+      document.title = `${SITE_NAME} — Energy, Insight & Inspiration`;
+      setAttr('metaDesc',   'content', desc);
+      setAttr('metaAuthor', 'content', SITE_NAME);
+      setAttr('canonical',  'href',    url);
+      setAttr('ogType',     'content', 'website');
+      setAttr('ogUrl',      'content', url);
+      setAttr('ogTitle',    'content', SITE_NAME);
+      setAttr('ogDesc',     'content', desc);
+      setAttr('twTitle',    'content', SITE_NAME);
+      setAttr('twDesc',     'content', desc);
+
+      const ld = {
+        '@context':   'https://schema.org',
+        '@type':      'Blog',
+        'name':       SITE_NAME,
+        'description': desc,
+        'url':        url,
+        'publisher':  { '@type':'Organization', 'name':SITE_NAME, 'url':SITE_URL }
+      };
+      document.getElementById('jsonLd').textContent = JSON.stringify(ld, null, 2);
     }
+  }
 
-    // ============================================
-    // FORMAT DATE
-    // ============================================
-    function formatDate(dateStr) {
-      if (!dateStr) return '';
+  // ============================================================
+  // SHARE SYSTEM
+  //
+  // Strategy: pure web-based social links — no app-redirect,
+  // no app-install checks, no WhatsApp direct-message scheme.
+  // Every share opens the platform's web intent in a new browser tab.
+  //
+  // Fallback chain (best → last resort):
+  //   1. navigator.share  (OS share sheet on mobile)
+  //   2. navigator.clipboard.writeText  (modern clipboard)
+  //   3. document.execCommand('copy')   (legacy clipboard)
+  //   4. window.prompt   (manual copy — always works)
+  // ============================================================
+  function openShareWindow(url) {
+    window.open(url, '_blank', 'noopener,noreferrer,width=640,height=520,scrollbars=yes');
+  }
+
+  function socialWebUrl(platform, shareUrl, title) {
+    const eu = encodeURIComponent(shareUrl);
+    const et = encodeURIComponent(title);
+    const eb = encodeURIComponent(title + '\n' + shareUrl);
+    switch (platform) {
+      // Twitter/X web intent — always browser, never app-scheme
+      case 'twitter':   return `https://twitter.com/intent/tweet?text=${et}&url=${eu}`;
+      // Facebook sharer — browser-only, no FB app required
+      case 'facebook':  return `https://www.facebook.com/sharer/sharer.php?u=${eu}`;
+      // WhatsApp WEB — opens web.whatsapp.com, never forces app install or
+      // the troublesome wa.me / whatsapp:// schemes
+      case 'whatsapp':  return `https://web.whatsapp.com/send?text=${eb}`;
+      // Telegram share — works in any browser
+      case 'telegram':  return `https://t.me/share/url?url=${eu}&text=${et}`;
+      // LinkedIn share
+      case 'linkedin':  return `https://www.linkedin.com/sharing/share-offsite/?url=${eu}`;
+      default:          return null;
+    }
+  }
+
+  async function copyToClipboard(text, btn) {
+    let ok = false;
+    // Try modern Clipboard API
+    try { await navigator.clipboard.writeText(text); ok = true; } catch(e) {}
+    // Legacy execCommand fallback
+    if (!ok) {
       try {
-        const parts = dateStr.split('/');
-        if (parts.length === 3) {
-          const date = new Date(parts[2], parts[1]-1, parts[0]);
-          return date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'short', 
-            day: 'numeric' 
-          });
-        }
-        return dateStr;
-      } catch {
-        return dateStr;
-      }
-    }
-
-    // ============================================
-    // GENERATE AUDIO URLs
-    // ============================================
-    function getAudioPreviewUrl(audioId) {
-      if (!audioId) return null;
-      return CONFIG.AUDIO_PREVIEW_URL.replace('FILE_ID', audioId);
-    }
-
-    function getAudioDownloadUrl(audioId) {
-      if (!audioId) return null;
-      return CONFIG.AUDIO_DOWNLOAD_URL.replace('FILE_ID', audioId);
-    }
-
-    // Get streamable audio URL - uses GitHub attachment URLs
-    function getAudioStreamUrl(audioId) {
-      if (!audioId) return null;
-      
-      // Check if we have a GitHub URL for this audio ID
-      const githubUrl = AUDIO_ID_TO_GITHUB[audioId];
-      if (githubUrl) {
-        return githubUrl;
-      }
-      
-      // Fallback to Google Drive usercontent
-      return `https://drive.usercontent.google.com/download?id=${audioId}&export=download`;
-    }
-
-    // ============================================
-    // FETCH ARTICLES FROM OPENSHEET
-    // ============================================
-    async function fetchArticles() {
-      isLoading = true;
-      error = null;
-      updateUI();
-
-      try {
-        const response = await fetch(CONFIG.OPENSHEET_URL);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        if (data && data.length > 0) {
-          articles = data.map(item => {
-            const audioId = item.audioId;
-            
-            return {
-              id: `article-${item.id}`,
-              num: parseInt(item.num) || 0,
-              title: item.title || `Article ${item.num}`,
-              content: item.content || 'No content available',
-              preview: item.preview || (item.content ? item.content.substring(0, 140) + '…' : ''),
-              audioId: audioId,
-              audioPreviewUrl: getAudioPreviewUrl(audioId),
-              audioDownloadUrl: getAudioDownloadUrl(audioId),
-              audioStreamUrl: getAudioStreamUrl(audioId),
-              date: item.date,
-              author: item.author || 'Anonymous',
-              fullText: item.content
-            };
-          });
-
-          articles.sort((a, b) => a.num - b.num);
-        } else {
-          articles = [];
-          error = 'No articles found';
-        }
-        
-        filterBySearch();
-        
-      } catch (err) {
-        error = err.message || 'Failed to load articles';
-        articles = [];
-      } finally {
-        isLoading = false;
-        updateUI();
-      }
-    }
-
-    // ============================================
-    // SEARCH FILTERING
-    // ============================================
-    function filterBySearch() {
-      const term = searchTerm.trim().toLowerCase();
-      if (!term) {
-        filteredArticles = [...articles];
-      } else {
-        filteredArticles = articles.filter(a => {
-          return (a.title && a.title.toLowerCase().includes(term)) ||
-                 (a.content && a.content.toLowerCase().includes(term)) ||
-                 (a.author && a.author.toLowerCase().includes(term));
+        const ta = Object.assign(document.createElement('textarea'), {
+          value: text, readOnly: true
         });
-      }
-      if (currentView === 'feed') updateUI();
+        Object.assign(ta.style, { position:'fixed', top:'-9999px', opacity:'0' });
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch(e) {}
     }
-
-    // ============================================
-    // OPEN ARTICLE
-    // ============================================
-    function openArticle(article) {
-      currentView = 'article';
-      currentArticle = article;
-      updateUI();
+    if (ok) {
+      const orig = btn.textContent;
+      btn.textContent = '✓ copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2500);
+    } else {
+      // Final fallback — let user manually copy
+      window.prompt('Copy this link:', text);
     }
+  }
 
-    // ============================================
-    // BACK TO FEED
-    // ============================================
-    function backToFeed() {
-      currentView = 'feed';
-      currentArticle = null;
-      updateUI();
+  async function nativeShare(url, title) {
+    if (navigator.share) {
+      try { await navigator.share({ title, text: title, url }); return; }
+      catch(e) {
+        if (e.name === 'AbortError') return; // user cancelled
+        // Unexpected error — fall through
+      }
     }
+    // No native share — copy to clipboard
+    try { await navigator.clipboard.writeText(url); alert('Link copied to clipboard!'); }
+    catch(e) { window.prompt('Copy this link:', url); }
+  }
 
-    // ============================================
-    // RENDER FEED VIEW
-    // ============================================
-    function renderFeedView() {
-      if (isLoading) {
-        mainEl.innerHTML = `<div class="center-spinner"><div class="spinner"></div></div>`;
-        statusEl.innerText = 'loading...';
-        return;
-      }
-
-      if (error) {
-        mainEl.innerHTML = `<div class="empty-state">⚠️ ${escapeHtml(error)}</div>`;
-        statusEl.innerText = '';
-        return;
-      }
-
-      if (filteredArticles.length === 0) {
-        mainEl.innerHTML = `<div class="empty-state">📭 no articles match your search</div>`;
-        statusEl.innerText = '';
-        return;
-      }
-
-      let html = `<div class="feed-grid">`;
-      
-      filteredArticles.forEach(art => {
-        const dateStr = formatDate(art.date);
-        
-        html += `
-          <div class="card" data-id="${escapeHtml(art.id)}">
-            <h3>${escapeHtml(art.title)}</h3>
-            <div class="meta-info">
-              <span>${escapeHtml(art.author)}</span>
-              ${dateStr ? `<span>${dateStr}</span>` : ''}
-              ${art.audioId ? `<span>🔊</span>` : ''}
-            </div>
-            <div class="preview">${escapeHtml(art.preview)}</div>
-            <span class="read-more">read →</span>
-          </div>
-        `;
-      });
-      
-      html += `</div>`;
-      mainEl.innerHTML = html;
-
-      document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', (e) => {
-          const id = card.dataset.id;
-          const article = articles.find(a => a.id === id);
-          if (article) openArticle(article);
-        });
-      });
-
-      statusEl.innerText = `${filteredArticles.length} article${filteredArticles.length > 1 ? 's' : ''}`;
-    }
-
-    // ============================================
-    // RENDER ARTICLE VIEW
-    // ============================================
-    function renderArticleView() {
-      if (!currentArticle) {
-        backToFeed();
-        return;
-      }
-
-      const art = currentArticle;
-      const dateStr = formatDate(art.date);
-      
-      const contentHtml = art.content
-        .split('\n')
-        .filter(para => para.trim())
-        .map(para => `<p>${escapeHtml(para)}</p>`)
-        .join('');
-      
-      // Build audio section with working players for hosted environment
-      let audioHtml = '';
-      
-      if (art.audioId) {
-        audioHtml = `
-          <div class="audio-section">
-            <div class="audio-label">
-              <span>🎧</span> listen to this article (for Mobile, use Landscape view to load Voice Player)
-            </div>
-            
-            <!-- Desktop: Google Drive Preview iframe -->
-            <div class="drive-preview">
-              <iframe 
-                src="${escapeHtml(art.audioPreviewUrl)}"
-                allow="autoplay"
-                frameborder="0">
-              </iframe>
-            </div>
-            
-            <!-- Mobile: Native HTML5 Audio Player -->
-            <div class="custom-player">
-              <audio controls preload="metadata" style="width: 100%; border-radius: 12px;">
-                <source src="${escapeHtml(art.audioDownloadUrl)}" type="audio/wav">
-                <source src="${escapeHtml(art.audioDownloadUrl)}" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-            
-            <!-- Download link - always visible as backup -->
-            <a href="${escapeHtml(art.audioDownloadUrl)}" 
-               class="download-link" 
-               download
-               target="_blank" 
-               rel="noopener">
-              ⬇️ download audio
-            </a>
-          </div>
-        `;
-      }
-
-      mainEl.innerHTML = `
-        <div class="article-view">
-          <button class="back-btn" id="backBtn">← all articles</button>
-          
-          <h2 class="article-title">${escapeHtml(art.title)}</h2>
-          <div class="article-meta">
-            ${escapeHtml(art.author)} ${dateStr ? `· ${dateStr}` : ''}
-          </div>
-          
-          ${audioHtml}
-          
-          <div class="article-content">${contentHtml}</div>
+  function buildShareHTML(articleId, title) {
+    const url = postUrl(articleId);
+    const hasNative = !!navigator.share;
+    return `
+      <div class="share-section"
+           data-share-url="${escapeHtml(url)}"
+           data-share-title="${escapeHtml(title)}">
+        <div class="share-label">share this post</div>
+        <div class="share-buttons">
+          ${hasNative ? `<button class="share-btn native-share" data-action="native">↗ share</button>` : ''}
+          <button class="share-btn copy-link"  data-action="copy">🔗 copy link</button>
+          <button class="share-btn twitter"    data-action="twitter">𝕏 X / Twitter</button>
+          <button class="share-btn facebook"   data-action="facebook">f Facebook</button>
+          <button class="share-btn whatsapp"   data-action="whatsapp">💬 WhatsApp</button>
+          <button class="share-btn telegram"   data-action="telegram">✈ Telegram</button>
+          <button class="share-btn linkedin"   data-action="linkedin">in LinkedIn</button>
         </div>
-      `;
+      </div>`;
+  }
 
-      document.getElementById('backBtn').addEventListener('click', backToFeed);
-      
-      statusEl.innerText = '';
-    }
+  function attachShareListeners(container) {
+    const section = container.querySelector('.share-section');
+    if (!section) return;
+    const { shareUrl, shareTitle } = section.dataset;
+    section.querySelectorAll('.share-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        e.stopPropagation();
+        const a = btn.dataset.action;
+        if      (a === 'native') await nativeShare(shareUrl, shareTitle);
+        else if (a === 'copy')   await copyToClipboard(shareUrl, btn);
+        else { const u = socialWebUrl(a, shareUrl, shareTitle); if (u) openShareWindow(u); }
+      });
+    });
+  }
 
-    // ============================================
-    // MAIN UI UPDATE
-    // ============================================
-    function updateUI() {
-      if (currentView === 'feed') {
-        renderFeedView();
+  // ============================================================
+  // DATA FETCH
+  // ============================================================
+  async function fetchArticles() {
+    isLoading = true; error = null;
+    mainEl.innerHTML = `<div class="center-spinner"><div class="spinner"></div></div>`;
+    statusEl.innerText = 'loading…';
+    try {
+      const res = await fetch(CONFIG.OPENSHEET_URL);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (data && data.length > 0) {
+        articles = data.map(item => ({
+          id:               `article-${item.id}`,
+          num:              parseInt(item.num) || 0,
+          title:            item.title  || `Article ${item.num}`,
+          content:          item.content || 'No content available',
+          preview:          item.preview || (item.content ? item.content.substring(0,140)+'…' : ''),
+          audioId:          item.audioId || null,
+          audioPreviewUrl:  audioPreviewUrl(item.audioId),
+          audioDownloadUrl: audioDownloadUrl(item.audioId),
+          date:             item.date   || '',
+          author:           item.author || 'Anonymous'
+        })).sort((a,b) => a.num - b.num);
       } else {
-        renderArticleView();
+        articles = []; error = 'No articles found';
       }
+      filterBySearch();
+    } catch(err) {
+      error = err.message || 'Failed to load articles'; articles = [];
+    } finally {
+      isLoading = false;
+      handleUrlRoute(); // deep-link check on first load
+    }
+  }
+
+  // ============================================================
+  // URL ROUTING — on load + browser back/forward
+  // ============================================================
+  function handleUrlRoute() {
+    const postId = postIdFromUrl();
+    if (postId) {
+      const art = articles.find(a => a.id === postId);
+      if (art) { _openArticle(art, false); return; }
+    }
+    renderFeedView();
+  }
+
+  window.addEventListener('popstate', () => {
+    const postId = postIdFromUrl();
+    if (postId) {
+      const art = articles.find(a => a.id === postId);
+      if (art) { currentView = 'article'; currentArticle = art; updateSEO(art); renderArticleView(); return; }
+    }
+    currentView = 'feed'; currentArticle = null;
+    updateSEO(null); renderFeedView();
+  });
+
+  // ============================================================
+  // SEARCH
+  // ============================================================
+  function filterBySearch() {
+    const t = searchTerm.trim().toLowerCase();
+    filteredArticles = t
+      ? articles.filter(a =>
+          (a.title   && a.title.toLowerCase().includes(t))   ||
+          (a.content && a.content.toLowerCase().includes(t)) ||
+          (a.author  && a.author.toLowerCase().includes(t)))
+      : [...articles];
+  }
+
+  let searchDebounce;
+  searchInput.addEventListener('input', e => {
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => {
+      searchTerm = e.target.value;
+      filterBySearch();
+      if (currentView === 'feed') renderFeedView();
+    }, 300);
+  });
+
+  // ============================================================
+  // NAVIGATION
+  // ============================================================
+  function _openArticle(article, push) {
+    currentView = 'article'; currentArticle = article;
+    if (push !== false) {
+      try { history.pushState({ postId: article.id }, article.title, postUrl(article.id)); } catch(e) {}
+    }
+    updateSEO(article);
+    renderArticleView();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  function openArticle(article)  { _openArticle(article, true); }
+
+  function backToFeed() {
+    currentView = 'feed'; currentArticle = null;
+    try { history.pushState({}, SITE_NAME, canonicalBase()); } catch(e) {}
+    updateSEO(null);
+    renderFeedView();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  // ============================================================
+  // RENDER — FEED
+  // ============================================================
+  function renderFeedView() {
+    if (isLoading) {
+      mainEl.innerHTML = `<div class="center-spinner"><div class="spinner"></div></div>`;
+      statusEl.innerText = 'loading…'; return;
+    }
+    if (error) {
+      mainEl.innerHTML = `<div class="empty-state">⚠️ ${escapeHtml(error)}</div>`;
+      statusEl.innerText = ''; return;
+    }
+    if (!filteredArticles.length) {
+      mainEl.innerHTML = `<div class="empty-state">📭 no articles match your search</div>`;
+      statusEl.innerText = ''; return;
     }
 
-    // ============================================
-    // SEARCH WITH DEBOUNCE
-    // ============================================
-    let searchDebounce;
-    searchInput.addEventListener('input', (e) => {
-      clearTimeout(searchDebounce);
-      searchDebounce = setTimeout(() => {
-        searchTerm = e.target.value;
-        if (currentView === 'feed') {
-          filterBySearch();
-        }
-      }, 300);
+    let html = `<div class="feed-grid">`;
+    filteredArticles.forEach(art => {
+      const dateStr = formatDate(art.date);
+      html += `
+        <article class="card" data-id="${escapeHtml(art.id)}">
+          <div class="card-header">
+            <h3>${escapeHtml(art.title)}</h3>
+            <button class="card-share-btn"
+                    data-share-id="${escapeHtml(art.id)}"
+                    data-share-title="${escapeHtml(art.title)}"
+                    title="Share this article"
+                    aria-label="Share ${escapeHtml(art.title)}">&#8679;</button>
+          </div>
+          <div class="meta-info">
+            <span>${escapeHtml(art.author)}</span>
+            ${dateStr ? `<span>${dateStr}</span>` : ''}
+            ${art.audioId ? `<span>🔊 audio</span>` : ''}
+          </div>
+          <p class="preview">${escapeHtml(art.preview)}</p>
+          <span class="read-more">read →</span>
+        </article>`;
+    });
+    html += `</div>`;
+    mainEl.innerHTML = html;
+
+    // Card click → open article
+    mainEl.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.card-share-btn')) return;
+        const art = articles.find(a => a.id === card.dataset.id);
+        if (art) openArticle(art);
+      });
     });
 
-    // ============================================
-    // INITIAL LOAD
-    // ============================================
-    fetchArticles();
-
-    // ============================================
-    // Optional: Listen for resize to handle dynamic changes
-    // ============================================
-    window.addEventListener('resize', () => {
-      // No need to do anything - CSS handles it
+    // Card share buttons → native share
+    mainEl.querySelectorAll('.card-share-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        e.stopPropagation();
+        await nativeShare(postUrl(btn.dataset.shareId), btn.dataset.shareTitle || SITE_NAME);
+      });
     });
 
-  })();
+    statusEl.innerText = `${filteredArticles.length} article${filteredArticles.length !== 1 ? 's' : ''}`;
+  }
+
+  // ============================================================
+  // ARTICLE NAVIGATION  — prev / next (smart: hides button when none)
+  // ============================================================
+  function buildArticleNavHTML(article) {
+    // Use sorted articles array (same order as feed)
+    const idx  = articles.indexOf(article);
+    const prev = idx > 0              ? articles[idx - 1] : null;
+    const next = idx < articles.length - 1 ? articles[idx + 1] : null;
+
+    if (!prev && !next) return ''; // only 1 article total — show nothing
+
+    let html = `<nav class="article-nav" aria-label="Article navigation">`;
+
+    if (prev) {
+      html += `
+        <button class="nav-btn prev-btn" data-nav-id="${escapeHtml(prev.id)}" aria-label="Previous article: ${escapeHtml(prev.title)}">
+          <span class="nav-direction">← Previous</span>
+          <span class="nav-title">${escapeHtml(prev.title)}</span>
+        </button>`;
+    } else {
+      // Keep layout balanced — empty spacer on left when no prev
+      html += `<div class="nav-spacer"></div>`;
+    }
+
+    if (next) {
+      html += `
+        <button class="nav-btn next-btn" data-nav-id="${escapeHtml(next.id)}" aria-label="Next article: ${escapeHtml(next.title)}">
+          <span class="nav-direction">Next →</span>
+          <span class="nav-title">${escapeHtml(next.title)}</span>
+        </button>`;
+    } else {
+      html += `<div class="nav-spacer"></div>`;
+    }
+
+    html += `</nav>`;
+    return html;
+  }
+
+  // ============================================================
+  // RENDER — ARTICLE
+  // ============================================================
+  function renderArticleView() {
+    if (!currentArticle) { backToFeed(); return; }
+    const art     = currentArticle;
+    const dateStr = formatDate(art.date);
+
+    const contentHtml = art.content
+      .split('\n').filter(p => p.trim())
+      .map(p => `<p>${escapeHtml(p)}</p>`).join('');
+
+    // ── AUDIO SECTION — desktop: iframe, mobile: native audio ────────────
+    let audioHtml = '';
+    if (art.audioId) {
+      audioHtml = `
+        <section class="audio-section" aria-label="Audio player">
+          <div class="audio-label"><span aria-hidden="true">🎧</span> listen to this article</div>
+
+          <!-- Google Drive preview player — desktop only (≥769px) -->
+          <div class="drive-preview">
+            <iframe
+              src="${escapeHtml(art.audioPreviewUrl)}"
+              allow="autoplay"
+              frameborder="0"
+              title="Audio player — ${escapeHtml(art.title)}">
+            </iframe>
+          </div>
+
+          <!-- Native audio — mobile only (≤768px) -->
+          <div class="simple-audio">
+            <audio controls preload="metadata"
+                   aria-label="Audio: ${escapeHtml(art.title)}">
+              <source src="${escapeHtml(art.audioDownloadUrl)}" type="audio/mpeg">
+              <source src="${escapeHtml(art.audioDownloadUrl)}" type="audio/wav">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <!-- Landscape tip — mobile only, shown via CSS -->
+          <div class="landscape-tip">
+            <span class="landscape-tip-icon">📱</span>
+            <span>If the player above doesn't work, try rotating your phone to <strong>landscape mode</strong> — this unlocks the full interactive player.</span>
+          </div>
+
+          <a href="${escapeHtml(art.audioDownloadUrl)}"
+             class="download-link" target="_blank" rel="noopener noreferrer"
+             aria-label="Download audio — ${escapeHtml(art.title)}">
+            ⬇️ download audio
+          </a>
+        </section>`;
+    }
+
+    mainEl.innerHTML = `
+      <div class="article-view" role="article">
+        <button class="back-btn" id="backBtn" aria-label="Back to all articles">← all articles</button>
+
+        <h2 class="article-title">${escapeHtml(art.title)}</h2>
+        <div class="article-meta">
+          ${escapeHtml(art.author)}${dateStr ? ` · <time datetime="${escapeHtml(art.date)}">${dateStr}</time>` : ''}
+        </div>
+
+        ${audioHtml}
+        <div class="article-content">${contentHtml}</div>
+        ${buildArticleNavHTML(art)}
+        ${buildShareHTML(art.id, art.title)}
+      </div>`;
+
+    document.getElementById('backBtn').addEventListener('click', backToFeed);
+    attachShareListeners(mainEl);
+
+    // Prev / next navigation
+    mainEl.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = articles.find(a => a.id === btn.dataset.navId);
+        if (target) openArticle(target);
+      });
+    });
+
+    const audioEl = mainEl.querySelector('audio');
+    if (audioEl) audioEl.addEventListener('error', () =>
+      console.warn('Native audio error — iframe or download still available'));
+
+    statusEl.innerText = '';
+  }
+
+  // ============================================================
+  // BOOT
+  // ============================================================
+  fetchArticles();
+
+})();
 </script>
 
-<!-- 
-==================================================================
-🎧 The Mundez Energy Blog
-Now with smart responsive audio:
-- Desktop (≥769px): Shows preview iframe, hides simple audio
-- Mobile (≤768px): Shows simple audio, hides preview iframe  
-- Download link: Always visible as backup
-==================================================================
+<!--
+========================================================================
+⚡ The Mundez Energy Blog — Feature changelog
+========================================================================
+✅ RESPONSIVE IFRAME (all screen sizes)
+   - Iframe shown on EVERY device — no more mobile/desktop CSS split
+   - touch-action: manipulation  → passes finger taps into iframe
+   - pointer-events: auto        → iframe captures touch events correctly
+   - Native <audio> permanently below as a no-fail fallback
+   - Extra height (130px) on screens < 480px for finger-friendly controls
+
+✅ PER-POST DEEP LINKS  (?post=article-N)
+   - Sharing a post gives the recipient a direct URL to that post
+   - history.pushState updates browser URL without reload
+   - Browser back / forward fully supported via popstate
+   - URL auto-detected from window.location; falls back to SITE_URL
+
+✅ SHARE BUTTONS — zero app-redirect problems
+   - "↗ share"   → navigator.share (OS share sheet, mobile)
+   - "🔗 copy"   → Clipboard API → execCommand → prompt fallback
+   - "WhatsApp"  → web.whatsapp.com/send (browser, no app check)
+   - "X/Twitter" → twitter.com/intent/tweet (browser intent)
+   - "Facebook"  → facebook.com/sharer (browser-only)
+   - "Telegram"  → t.me/share/url (browser)
+   - "LinkedIn"  → linkedin.com/sharing/share-offsite (browser)
+   - Card-level share button (↑) triggers native share sheet per post
+
+✅ FULL SEO
+   - Dynamic <title>, meta description, canonical URL per page
+   - Open Graph tags (og:) — Facebook, WhatsApp, Slack link previews
+   - Twitter/X Card — summary_large_image
+   - JSON-LD structured data: Blog schema (home) + Article schema (post)
+   - robots: index, follow, max-snippet:-1
+   - Semantic HTML: <article>, <section>, <time>, aria-labels
+   - Dark mode preference persisted in localStorage
+========================================================================
 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-products">
+      <strong>The Mundez Energy Blog</strong>, <strong>DiscoWatchNG</strong>, <strong>GencoWatchNG</strong> and <strong>PowerWatchNG</strong>
+      are all products and monitoring tools of <strong>Mundez Integrated Services</strong> and <strong>MDZ Concepts</strong>
+      for the energy sector in Nigeria.
+    </p>
+    <p class="footer-copy">© 2026 Mundez Integrated Services &amp; MDZ Concepts. All rights reserved.</p>
+  </div>
+</footer>
+
 </body>
 </html>
