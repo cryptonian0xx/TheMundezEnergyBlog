@@ -375,9 +375,7 @@
     .share-btn.native-share { background: linear-gradient(135deg, #25657a, #6240a0); }
     .share-btn.copy-link    { background: #f0f2f5; color: #1e2632; border: 1px solid #d0d5dd; }
     .share-btn.copy-link.copied { background: #e6f4ea; color: #2e7d32; border-color: #a5d6a7; }
-    .share-btn.twitter      { background: #000; }
     .share-btn.facebook     { background: #1877f2; }
-    .share-btn.whatsapp     { background: #25d366; }
     .share-btn.telegram     { background: #2aabee; }
     .share-btn.linkedin     { background: #0a66c2; }
 
@@ -663,16 +661,6 @@
 
   // ============================================================
   // SHARE SYSTEM
-  //
-  // Strategy: pure web-based social links — no app-redirect,
-  // no app-install checks, no WhatsApp direct-message scheme.
-  // Every share opens the platform's web intent in a new browser tab.
-  //
-  // Fallback chain (best → last resort):
-  //   1. navigator.share  (OS share sheet on mobile)
-  //   2. navigator.clipboard.writeText  (modern clipboard)
-  //   3. document.execCommand('copy')   (legacy clipboard)
-  //   4. window.prompt   (manual copy — always works)
   // ============================================================
   function openShareWindow(url) {
     window.open(url, '_blank', 'noopener,noreferrer,width=640,height=520,scrollbars=yes');
@@ -681,18 +669,9 @@
   function socialWebUrl(platform, shareUrl, title) {
     const eu = encodeURIComponent(shareUrl);
     const et = encodeURIComponent(title);
-    const eb = encodeURIComponent(title + '\n' + shareUrl);
     switch (platform) {
-      // Twitter/X web intent — always browser, never app-scheme
-      case 'twitter':   return `https://twitter.com/intent/tweet?text=${et}&url=${eu}`;
-      // Facebook sharer — browser-only, no FB app required
       case 'facebook':  return `https://www.facebook.com/sharer/sharer.php?u=${eu}`;
-      // WhatsApp WEB — opens web.whatsapp.com, never forces app install or
-      // the troublesome wa.me / whatsapp:// schemes
-      case 'whatsapp':  return `https://web.whatsapp.com/send?text=${eb}`;
-      // Telegram share — works in any browser
       case 'telegram':  return `https://t.me/share/url?url=${eu}&text=${et}`;
-      // LinkedIn share
       case 'linkedin':  return `https://www.linkedin.com/sharing/share-offsite/?url=${eu}`;
       default:          return null;
     }
@@ -750,9 +729,7 @@
         <div class="share-buttons">
           ${hasNative ? `<button class="share-btn native-share" data-action="native">↗ share</button>` : ''}
           <button class="share-btn copy-link"  data-action="copy">🔗 copy link</button>
-          <button class="share-btn twitter"    data-action="twitter">𝕏 X / Twitter</button>
           <button class="share-btn facebook"   data-action="facebook">f Facebook</button>
-          <button class="share-btn whatsapp"   data-action="whatsapp">💬 WhatsApp</button>
           <button class="share-btn telegram"   data-action="telegram">✈ Telegram</button>
           <button class="share-btn linkedin"   data-action="linkedin">in LinkedIn</button>
         </div>
@@ -1020,7 +997,7 @@
           <!-- Landscape tip — mobile only, shown via CSS -->
           <div class="landscape-tip">
             <span class="landscape-tip-icon">📱</span>
-            <span>If the player above doesn't work, try rotating your phone to <strong>landscape mode</strong> — this unlocks the full interactive player.</span>
+            <span>For the best audio experience on mobile, <strong>tilt your phone to landscape mode</strong>, then <strong>refresh the page</strong> — this loads the full interactive player.</span>
           </div>
 
           <a href="${escapeHtml(art.audioDownloadUrl)}"
@@ -1092,8 +1069,6 @@
 ✅ SHARE BUTTONS — zero app-redirect problems
    - "↗ share"   → navigator.share (OS share sheet, mobile)
    - "🔗 copy"   → Clipboard API → execCommand → prompt fallback
-   - "WhatsApp"  → web.whatsapp.com/send (browser, no app check)
-   - "X/Twitter" → twitter.com/intent/tweet (browser intent)
    - "Facebook"  → facebook.com/sharer (browser-only)
    - "Telegram"  → t.me/share/url (browser)
    - "LinkedIn"  → linkedin.com/sharing/share-offsite (browser)
