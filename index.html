@@ -489,6 +489,140 @@
       font-weight: 400;
     }
     body.dark .footer-copy { color: #6a7285; }
+
+    /* ---------- FOOTER LINKS ---------- */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.25rem;
+      margin-bottom: 0.9rem;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: #25657a;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #6240a0; text-decoration: underline; }
+    body.dark .footer-links a { color: #4da8c0; }
+    body.dark .footer-links a:hover { color: #a07ae0; }
+    .footer-links .this-site {
+      color: #5f6b7f;
+      font-weight: 500;
+      font-size: 0.82rem;
+    }
+    body.dark .footer-links .this-site { color: #9aa1b0; }
+
+    /* ---------- SUBSCRIBE BUTTONS ---------- */
+    .footer-subscribe {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .sub-btn {
+      padding: 0.45rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s;
+    }
+    .sub-btn.subscribe   { background: linear-gradient(135deg,#25657a,#6240a0); color: white; }
+    .sub-btn.subscribe:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .sub-btn.unsubscribe { background: #f0f2f5; color: #5f6b7f; border: 1px solid #d0d5dd; }
+    .sub-btn.unsubscribe:hover { background: #e5e9f0; }
+    body.dark .sub-btn.unsubscribe { background: #2a2f3a; color: #9aa1b0; border-color: #3a3f4b; }
+    body.dark .sub-btn.unsubscribe:hover { background: #333946; }
+
+    /* ---------- SUBSCRIBE MODAL ---------- */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem 2rem 1.8rem;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 24px 48px -12px rgba(0,0,0,0.25);
+      position: relative;
+      animation: modalIn 0.22s ease;
+    }
+    body.dark .modal-box { background: #1c1f26; color: #e2e4e9; }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-size: 1.4rem;
+      cursor: pointer; color: #9aa1b0; line-height: 1;
+    }
+    .modal-close:hover { color: #1a1e24; }
+    body.dark .modal-close:hover { color: #e2e4e9; }
+
+    .modal-title {
+      font-size: 1.15rem; font-weight: 600;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(145deg,#25657a,#6240a0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .modal-desc {
+      font-size: 0.85rem; color: #5f6b7f;
+      margin-bottom: 1.2rem; line-height: 1.5;
+    }
+    body.dark .modal-desc { color: #9aa1b0; }
+
+    .modal-input {
+      width: 100%;
+      padding: 0.65rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #d0d5dd;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      background: #f9fafb;
+      outline: none;
+      transition: border 0.15s;
+    }
+    .modal-input:focus { border-color: #25657a; }
+    body.dark .modal-input { background: #252930; border-color: #3a3f4b; color: #e2e4e9; }
+
+    .modal-submit {
+      width: 100%;
+      padding: 0.65rem;
+      border-radius: 40px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg,#25657a,#6240a0);
+      color: white;
+      transition: filter 0.15s, transform 0.15s;
+    }
+    .modal-submit:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .modal-feedback {
+      font-size: 0.82rem; text-align: center;
+      margin-top: 0.75rem; min-height: 1.2em;
+    }
+    .modal-feedback.ok  { color: #2e7d32; }
+    .modal-feedback.err { color: #c0392b; }
   </style>
 </head>
 <body>
@@ -1084,6 +1218,20 @@
    - Dark mode preference persisted in localStorage
 ========================================================================
 -->
+<!-- ============================================================
+     SUBSCRIBE / UNSUBSCRIBE MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="subscribeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <div class="modal-title" id="modalTitle">📬 Stay in the Loop</div>
+    <p class="modal-desc" id="modalDesc">Get notified by email whenever a new article is published on The Mundez Energy Blog.</p>
+    <input class="modal-input" type="email" id="modalEmail" placeholder="your@email.com" autocomplete="email">
+    <button class="modal-submit" id="modalSubmit">Subscribe</button>
+    <div class="modal-feedback" id="modalFeedback"></div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="footer-inner">
     <p class="footer-products">
@@ -1091,9 +1239,113 @@
       are all products and monitoring tools of <strong>Mundez Integrated Services</strong> and <strong>MDZ Concepts</strong>
       for the energy sector in Nigeria.
     </p>
+
+    <!-- Platform Links -->
+    <nav class="footer-links" aria-label="Our platforms">
+      <span class="this-site">⚡ The Mundez Energy Blog</span>
+      <a href="https://cryptonian0xx.github.io/DiscoWatchNG/" target="_blank" rel="noopener noreferrer">DiscoWatchNG</a>
+      <a href="https://cryptonian0xx.github.io/GencoWatchNG/" target="_blank" rel="noopener noreferrer">GencoWatchNG</a>
+      <a href="https://cardinalmundez.github.io/PowerWatchNG/" target="_blank" rel="noopener noreferrer">PowerWatchNG</a>
+    </nav>
+
+    <!-- Subscribe / Unsubscribe -->
+    <div class="footer-subscribe">
+      <button class="sub-btn subscribe" id="openSubscribe">📧 Subscribe</button>
+      <button class="sub-btn unsubscribe" id="openUnsubscribe">Unsubscribe</button>
+    </div>
+
     <p class="footer-copy">© 2026 Mundez Integrated Services &amp; MDZ Concepts. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+// ============================================================
+// SUBSCRIBE / UNSUBSCRIBE MODAL
+// ============================================================
+(function () {
+  // ── Replace with your deployed Apps Script Web App URL ──
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-zfYoPeV5AlJRip6UkMegBJmchBFfA9m2TFXjNjfYJTigUZuC0h6aZXx6vPKvxjH9/exec';
+
+  const overlay   = document.getElementById('subscribeModal');
+  const closeBtn  = document.getElementById('modalClose');
+  const titleEl   = document.getElementById('modalTitle');
+  const descEl    = document.getElementById('modalDesc');
+  const emailEl   = document.getElementById('modalEmail');
+  const submitBtn = document.getElementById('modalSubmit');
+  const feedback  = document.getElementById('modalFeedback');
+
+  let currentMode = 'subscribe'; // or 'unsubscribe'
+
+  function openModal(mode) {
+    currentMode = mode;
+    feedback.textContent = '';
+    feedback.className   = 'modal-feedback';
+    emailEl.value        = '';
+    submitBtn.disabled   = false;
+
+    if (mode === 'subscribe') {
+      titleEl.textContent = '📬 Stay in the Loop';
+      descEl.textContent  = 'Get notified by email whenever a new article is published on The Mundez Energy Blog.';
+      submitBtn.textContent = 'Subscribe';
+    } else {
+      titleEl.textContent = '👋 Unsubscribe';
+      descEl.textContent  = 'Enter your email address to remove yourself from The Mundez Energy Blog mailing list.';
+      submitBtn.textContent = 'Unsubscribe';
+    }
+    overlay.classList.add('open');
+    emailEl.focus();
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+  }
+
+  document.getElementById('openSubscribe').addEventListener('click', () => openModal('subscribe'));
+  document.getElementById('openUnsubscribe').addEventListener('click', () => openModal('unsubscribe'));
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  submitBtn.addEventListener('click', async () => {
+    const email = emailEl.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      feedback.textContent = '⚠️ Please enter a valid email address.';
+      feedback.className   = 'modal-feedback err';
+      return;
+    }
+
+    submitBtn.disabled    = true;
+    submitBtn.textContent = 'Sending…';
+    feedback.textContent  = '';
+    feedback.className    = 'modal-feedback';
+
+    try {
+      const params = new URLSearchParams({ action: currentMode, email });
+      const res    = await fetch(`${SCRIPT_URL}?${params}`);
+      const data   = await res.json();
+
+      if (data.success) {
+        feedback.textContent = currentMode === 'subscribe'
+          ? '✅ You\'re subscribed! Check your inbox for a confirmation.'
+          : '✅ You\'ve been unsubscribed successfully.';
+        feedback.className = 'modal-feedback ok';
+        emailEl.value = '';
+        setTimeout(closeModal, 2800);
+      } else {
+        feedback.textContent = `⚠️ ${data.message || 'Something went wrong. Please try again.'}`;
+        feedback.className   = 'modal-feedback err';
+        submitBtn.disabled   = false;
+        submitBtn.textContent = currentMode === 'subscribe' ? 'Subscribe' : 'Unsubscribe';
+      }
+    } catch (err) {
+      feedback.textContent = '⚠️ Network error. Please try again later.';
+      feedback.className   = 'modal-feedback err';
+      submitBtn.disabled   = false;
+      submitBtn.textContent = currentMode === 'subscribe' ? 'Subscribe' : 'Unsubscribe';
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
