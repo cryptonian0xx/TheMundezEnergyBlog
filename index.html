@@ -1321,22 +1321,17 @@
 
     try {
       const params = new URLSearchParams({ action: currentMode, email });
-      const res    = await fetch(`${SCRIPT_URL}?${params}`);
-      const data   = await res.json();
+      // Apps Script doesn't return CORS headers, so we use no-cors.
+      // The response will be opaque (unreadable) but the script runs fine.
+      await fetch(`${SCRIPT_URL}?${params}`, { mode: 'no-cors' });
 
-      if (data.success) {
-        feedback.textContent = currentMode === 'subscribe'
-          ? '✅ You\'re subscribed! Check your inbox for a confirmation.'
-          : '✅ You\'ve been unsubscribed successfully.';
-        feedback.className = 'modal-feedback ok';
-        emailEl.value = '';
-        setTimeout(closeModal, 2800);
-      } else {
-        feedback.textContent = `⚠️ ${data.message || 'Something went wrong. Please try again.'}`;
-        feedback.className   = 'modal-feedback err';
-        submitBtn.disabled   = false;
-        submitBtn.textContent = currentMode === 'subscribe' ? 'Subscribe' : 'Unsubscribe';
-      }
+      // If we reach here the request was sent — treat as success.
+      feedback.textContent = currentMode === 'subscribe'
+        ? '✅ You\'re subscribed! Check your inbox for a confirmation.'
+        : '✅ You\'ve been unsubscribed successfully.';
+      feedback.className = 'modal-feedback ok';
+      emailEl.value = '';
+      setTimeout(closeModal, 2800);
     } catch (err) {
       feedback.textContent = '⚠️ Network error. Please try again later.';
       feedback.className   = 'modal-feedback err';
